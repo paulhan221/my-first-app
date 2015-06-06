@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateArticleRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\HttpResponse;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
@@ -33,11 +34,34 @@ class ArticlesController extends Controller {
 		return view('articles.create');
 	}
 
-	public function store(CreateArticleRequest $request)
+	public function store(Request $request)
 	{
+
+		$this->validate($request, ['title' => 'required', 'body' => 'required']);
 
 		Article::create($request->all());
 
 		return redirect('articles');
 	}
+
+	public function edit($id)
+	{
+
+		$article = Article::findOrFail($id);
+
+		return view('articles.edit', compact('article'));
+
+	}
+
+	public function update($id, Request $request)
+	{
+		$article = Article::findOrFail($id);
+
+		$article->update($request->all());
+
+		return redirect('articles');
+	}
+
+
+
 }
