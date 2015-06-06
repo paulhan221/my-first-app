@@ -2,9 +2,11 @@
 
 use App\Article;
 use App\Http\Requests;
+use App\Http\Requests\CreateArticleRequest;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon; 
-use Request;	
+use Illuminate\HttpResponse;
+use Carbon\Carbon;
+
 
 class ArticlesController extends Controller {
 
@@ -34,7 +36,7 @@ class ArticlesController extends Controller {
 	public function store(CreateArticleRequest $request)
 	{
 
-		Article::create(Request::all());
+		Article::create($request->all());
 
 		return redirect('articles');
 	}
