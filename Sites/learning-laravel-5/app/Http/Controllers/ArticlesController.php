@@ -2,9 +2,10 @@
 
 use App\Article;
 use App\Http\Requests;
+use App\Http\Requests\ArticleRequest;
+use Illuminate\HttpResponse;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon; 
-use Request;	
+use Illuminate\Http\Request;
 
 class ArticlesController extends Controller {
 
@@ -21,8 +22,6 @@ class ArticlesController extends Controller {
 
 		$article = Article::findOrFail($id);
 
-		dd($article->published_at);
-
 		return view('articles.show', compact('article'));
 	}
 
@@ -31,11 +30,38 @@ class ArticlesController extends Controller {
 		return view('articles.create');
 	}
 
-	public function store(CreateArticleRequest $request)
+	public function store(Request $request)
 	{
 
-		Article::create(Request::all());
+		$this->validate($request, ["title" => 'required', 'body' => 'required']);
+
+		Article::create($request->all());
 
 		return redirect('articles');
 	}
+
+	public function edit($id)
+	{
+		$article = Article::findOrFail($id);
+
+		return view('articles.edit', compact('article'));
+	}
+
+	public function update($id, ArticleRequest $request)
+	{
+
+		$article = Article::findOrFail($id);
+
+		$article->update($request->all());
+
+		// how does it know to return to proper id?
+		return redirect('articles');
+	}
+
+
 }
+
+
+
+
+

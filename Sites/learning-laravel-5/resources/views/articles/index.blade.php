@@ -3,6 +3,7 @@
 @section('content')
 
 	<h1>All Articles</h1>
+	<a href="{{ url('articles/create') }}">Create New Article</a>
 	<hr/>
 	@foreach ($articles as $article)
 

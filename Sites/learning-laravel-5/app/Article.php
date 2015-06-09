@@ -5,10 +5,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model {
 
+	/**
+	 * Properties which may be mass-assigned.
+	 */
 	protected $fillable = [
 		'title',
 		'body',
-		'published_at'
+		'published_at',
+		'user_id'
 	]; 
 
 	// makes date a Carbon instance
@@ -29,6 +33,11 @@ class Article extends Model {
 
 		$this->attributes['published_at']= Carbon::parse($date);
 
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('App\User');
 	}
 
 }
