@@ -1,12 +1,12 @@
-{!! Form::hidden('user_id', 1) !!}
-
 <div class="form-group">
 
-	{!! Form::label('title', 'Title:') !!}
+  {!! Form::hidden('user_id', 1) !!}
 
-	{!! Form::text('title', null, ['class' => 'form-control']) !!}
+  {!! Form::label('title', 'Title:') !!}
 
-</div>			
+  {!! Form::text('title', null, ['class' => 'form-control']) !!}
+
+</div>
 
 <!-- Body Form Input -->
 <div class="form-group">
@@ -30,3 +30,4 @@
 	{!! Form::submit($submitButton, ['class'=> 'btn btn-primary form-control']) !!}
 
 </div>	
+

@@ -2,14 +2,23 @@
 
 @section('content')
 
-	<h1>Edit: {!! $article->title !!}</h1>
+  <h1>Edit: {{ $article->title }}</h1>
 
-	{!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticlesController@update', $article->id]]) !!}
+  <hr/>
 
-			@include('articles._form', ['submitButton' => 'Update Article'])
- 
-		{!! Form::close() !!}
+  {!! Form::model($article, ['method' => 'PATCH', 'action' => ['ArticlesController@update', $article->id]]) !!}
 
-		@include('errors.list')
+    @include('articles._form', ["submitButton" => 'Update Article'])
+
+  {!! Form::close() !!}
+
+  @if ($errors->any())
+    <ul class="alert alert-danger">
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  @endif
 
 @endsection('content')
+

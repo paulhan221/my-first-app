@@ -8,10 +8,18 @@
 
 	{!! Form::open(['url' => '/articles']) !!}
 
-		@include('articles._form', ['submitButton' => 'Add Article'])
+		@include('articles._form', ["submitButton" => 'Create Article'])
 
-		{!! Form::close() !!}
+	{!! Form::close() !!}
 
-		@include('errors.list')
+  @if ($errors->any())
+    <ul class="alert alert-danger">
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  @endif
+
 
 @endsection('content')
+

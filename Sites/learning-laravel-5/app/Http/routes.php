@@ -27,8 +27,6 @@ Route::get('about', 'PagesController@about');
 
 // Route::post('articles', 'ArticlesController@store');
 
-// Route::get('articles/{id}/edit', 'ArticlesController@edit');
-
 Route::resource('articles', 'ArticlesController');
 
 Route::controllers([
